@@ -1,0 +1,37 @@
+[package]
+name = "counter"
+version = "0.1.0"
+authors = ["EC <ec@someplace.com>"]
+edition = "2021"
+
+[dependencies]
+ink_lang = { version = "*", default-features = false }
+scale-info = { version = "*", default-features = false }
+
+# see https://ink.substrate.io/faq/  re debug node console messages
+# substrate-contracts-node --dev -lerror,runtime::contracts=debug
+#ink_env = { version = "*", default-features = false, features = ["ink-debug"] }
+ink_env = { version = "*", default-features = false }
+
+ink_storage = { version = "*", default-features = false }
+scale = { package = "parity-scale-codec", version = "*", default-features = false }
+ink_metadata = { version = "3", default-features = false, features = ["derive"], optional = true }
+ink_primitives = { version = "*", default-features = false }
+
+
+[lib]
+name = "counter"
+path = "lib.rs"
+crate-type = [ "cdylib" ]
+
+[features]
+default = ["std"]
+std = [
+    "scale-info/std",
+    "ink_env/std",
+    "ink_storage/std",
+    "scale/std",
+    "ink_metadata/std",
+    "ink_primitives/std",
+]
+ink-as-dependency = []
